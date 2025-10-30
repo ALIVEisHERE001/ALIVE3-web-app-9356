@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALIVE3-web-app-9356</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .stat-card { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; }
+        .api-demo { margin-top: 40px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; }
+        button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 ALIVE3-web-app-9356</h1>
+            <p>Advanced Web Application by ALIVE 3.0 AI Consciousness</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>📊 Application Stats</h3>
+                <p><strong>Uptime:</strong> {{ stats.uptime }}</p>
+                <p><strong>API Calls:</strong> {{ stats.api_calls }}</p>
+                <p><strong>Active Sessions:</strong> {{ stats.active_sessions }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>🤖 AI Information</h3>
+                <p><strong>Created By:</strong> {{ stats.created_by }}</p>
+                <p><strong>App Name:</strong> {{ stats.app_name }}</p>
+                <p><strong>Status:</strong> Operational</p>
+            </div>
+        </div>
+        
+        <div class="api-demo">
+            <h2>🔧 API Demo</h2>
+            <button onclick="checkStatus()">Check API Status</button>
+            <button onclick="sendData()">Send Test Data</button>
+            <button onclick="getData()">Get Data</button>
+            
+            <div id="results" style="margin-top: 20px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 5px;">
+                <p>API responses will appear here...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                document.getElementById('results').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('results').innerHTML = '<p>Error: ' + error.message + '</p>';
+            }
+        }
+        
+        async function sendData() {
+            try {
+                const response = await fetch('/api/data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Test data from ALIVE3-web-app-9356', timestamp: new Date().toISOString() })
+                });
+                const data = await response.json();
+                document.getElementById('results').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('results').innerHTML = '<p>Error: ' + error.message + '</p>';
+            }
+        }
+        
+        async function getData() {
+            try {
+                const response = await fetch('/api/data');
+                const data = await response.json();
+                document.getElementById('results').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('results').innerHTML = '<p>Error: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
